@@ -1,4 +1,6 @@
 import java.util.StringTokenizer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class EdgeField {
    private int numFigure, tableID, tableBound, fieldBound, dataType, varcharValue;
@@ -6,7 +8,7 @@ public class EdgeField {
    private boolean disallowNull, isPrimaryKey;
    private static String[] strDataType = {"Varchar", "Boolean", "Integer", "Double"};
    public static final int VARCHAR_DEFAULT_LENGTH = 1;
-   
+	 private static final Logger logger = LogManager.getLogger(EdgeField.class);
    public EdgeField(String inputString) {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
@@ -19,6 +21,8 @@ public class EdgeField {
       defaultValue = "";
       varcharValue = VARCHAR_DEFAULT_LENGTH;
       dataType = 0;
+		 logger.debug("EdgeField constructor called with input: " + inputString);
+		 }
    }
    
    public int getNumFigure() {
@@ -30,11 +34,13 @@ public class EdgeField {
    }
    
    public int getTableID() {
+			logger.debug("TableID set to: " + value);
       return tableID;
    }
    
    public void setTableID(int value) {
       tableID = value;
+	logger.debug("TableBound set to: " + value);
    }
    
    public int getTableBound() {
