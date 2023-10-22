@@ -4,8 +4,12 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.io.*;
 import java.util.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CreateDDLMySQL extends EdgeConvertCreateDDL {
+
+   private static Logger logger = LogManager.getLogger(CreateDDLMySQL.class.getName());
 
    protected String databaseName;
    //this array is for determining how MySQL refers to datatypes
@@ -14,14 +18,17 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
    public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {
       super(inputTables, inputFields);
+      logger.info("CreateDDLMySQL constructor called w/ inputTables and inputFields");
       sb = new StringBuffer();
    } //CreateDDLMySQL(EdgeTable[], EdgeField[])
    
    public CreateDDLMySQL() { //default constructor with empty arg list for to allow output dir to be set before there are table and field objects
-      
+
+      logger.info("CreateDDLMySQL constructor called w/ 0 args");
    }
    
    public void createDDL() {
+      logger.info("Creating DDL...");
       EdgeConvertGUI.setReadSuccess(true);
       databaseName = generateDatabaseName();
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
@@ -96,8 +103,10 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                }
                sb.append(");\r\n\r\n"); //end of table
             }
+            logger.debug("Created table: {} ", tables[tableCount].getName());
          }
       }
+     logger.info("Creating DDL COMPLETED");
    }
 
    protected int convertStrBooleanToInt(String input) { //MySQL uses '1' and '0' for boolean types
@@ -109,6 +118,9 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
    
    public String generateDatabaseName() { //prompts user for database name
+
+      logger.info("Promping database name");
+     
       String dbNameDefault = "MySQLDB";
       //String databaseName = "";
 
@@ -129,6 +141,9 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             JOptionPane.showMessageDialog(null, "You must select a name for your database.");
          }
       } while (databaseName.equals(""));
+     
+      logger.info("Database name is set to: {}", databaseName);
+     
       return databaseName;
    }
    
