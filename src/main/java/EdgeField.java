@@ -23,7 +23,7 @@ public class EdgeField {
       dataType = 0;
 		 logger.debug("EdgeField constructor called with input: " + inputString);
 		 }
-   }
+   
    
    public int getNumFigure() {
       return numFigure;
@@ -34,7 +34,7 @@ public class EdgeField {
    }
    
    public int getTableID() {
-			logger.debug("TableID set to: " + value);
+			logger.debug("TableID set to: " + tableID);
       return tableID;
    }
    
