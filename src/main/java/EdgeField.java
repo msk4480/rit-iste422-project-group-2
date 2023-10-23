@@ -21,9 +21,10 @@ public class EdgeField {
       defaultValue = "";
       varcharValue = VARCHAR_DEFAULT_LENGTH;
       dataType = 0;
-		 logger.debug("EdgeField constructor called with input: " + inputString);
-		 }
-   
+
+		  logger.debug("EdgeField constructor called with input: " + inputString);
+   }
+
    
    public int getNumFigure() {
       return numFigure;
@@ -33,15 +34,16 @@ public class EdgeField {
       return name;
    }
    
+
    public int getTableID() {
 			logger.debug("TableID set to: " + tableID);
-      return tableID;
-   }
+		 return tableID;
+		}
    
    public void setTableID(int value) {
       tableID = value;
-	logger.debug("TableBound set to: " + value);
-   }
+	    }		 
+   
    
    public int getTableBound() {
       return tableBound;

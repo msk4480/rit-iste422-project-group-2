@@ -23,3 +23,17 @@
 hs_err_pid*
 
 nohup.out
+
+# Untracked Paths:
+build/
+target/
+.gradle/
+.settings/
+
+# Untracked Files:
+.project
+.classpath
+.replit
+.breakpoints
+replit.nix
+pom.xml
