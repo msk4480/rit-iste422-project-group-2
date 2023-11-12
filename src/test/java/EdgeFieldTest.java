@@ -55,11 +55,6 @@ public class EdgeFieldTest {
 	}
 
 	@Test
-	public void testLogging() {
-		// Implement tests to check if logging messages are generated as expected
-	}
-
-	@Test
 	public void testToString() {
 		EdgeField edgeField = new EdgeField("1|FieldName|0|0|false|true|Default");
 		String expectedString = "1|FieldName|0|0|0|1|10|false|true|Default";
@@ -81,7 +76,5 @@ public class EdgeFieldTest {
 		EdgeField edgeField = new EdgeField("1|FieldName|0|0|false|true|Default");
 		edgeField.setDataType(10); // This should throw an IllegalArgumentException
 	}
-
-	// Add more test methods for boundaries, exceptions, and other scenarios.
 
 }
