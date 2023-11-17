@@ -75,6 +75,8 @@ public abstract class EdgeConvertCreateDDL {
     return null;
   }
 
+  public abstract void setDatabaseName(String name);
+
   public abstract String getDatabaseName();
 
   public abstract String getProductName();

@@ -1095,10 +1095,15 @@ public class EdgeConvertGUI {
 
       try {
          Class selectedSubclass = objSubclasses[selected].getClass();
+        
          Method getSQLString = selectedSubclass.getMethod("getSQLString", null);
          Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", null);
-         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], null);
+         Method setDatabaseName = selectedSubclass.getMethod("setDatabaseName", String.class);
+        
+         setDatabaseName.invoke(objSubclasses[selected], databaseNameDialog()); //added to separate GUI code
          databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], null);
+         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], null);
+      
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
       } catch (NoSuchMethodException nsme) {
@@ -1109,6 +1114,47 @@ public class EdgeConvertGUI {
 
       return strSQLString;
    }
+
+  private String databaseNameDialog() {
+
+    String databaseName = "";
+    String databaseNameDefault = "MyDB";
+
+    logger.info("Promping database name");
+    
+    do {
+
+      databaseName = (String) JOptionPane.showInputDialog(
+        null,
+        "Enter the databse name:",
+        "Database Name",
+        JOptionPane.PLAIN_MESSAGE,
+        null,
+        null,
+        databaseNameDefault
+      );
+
+      if(databaseName == null) {
+        
+        this.setReadSuccess(false);
+        logger.info("Database name prompt canceled and set to null!");
+        return ""; //breaks early due to canceled request
+      }
+
+      if(databaseName.equals("")) {
+        
+        JOptionPane.showMessageDialog(
+          null,
+          "You must select a name for your database."
+        ); 
+      }
+      
+    } while( databaseName.equals("") );
+
+    logger.info("Database name prompt returning: {}", databaseName);
+
+    return databaseName;
+  }
 
    private void writeSQL(String output) {
       logger.info("Writing SQL");

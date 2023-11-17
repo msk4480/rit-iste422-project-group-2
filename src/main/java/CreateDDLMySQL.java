@@ -18,7 +18,8 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
 
    public CreateDDLMySQL(EdgeTable[] inputTables, EdgeField[] inputFields) {
       super(inputTables, inputFields);
-      logger.info("CreateDDLMySQL constructor called w/ inputTables and inputFields");
+      logger.info("****Constructor Called with inputTables[] and EdgeField[]****");
+      logger.debug("EdgeTables: " + Arrays.toString(inputTables) + "\n\nEdgeFields: " + Arrays.toString(inputFields));
       sb = new StringBuffer();
    } //CreateDDLMySQL(EdgeTable[], EdgeField[])
    
@@ -30,7 +31,9 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    public void createDDL() {
       logger.info("Creating DDL...");
       EdgeConvertGUI.setReadSuccess(true);
-      databaseName = generateDatabaseName();
+      // databaseName = generateDatabaseName();
+      if(databaseName == null || databaseName.equals("")) 
+        databaseName = "MySQLDB";
       sb.append("CREATE DATABASE " + databaseName + ";\r\n");
       sb.append("USE " + databaseName + ";\r\n");
       for (int boundCount = 0; boundCount <= maxBound; boundCount++) { //process tables in order from least dependent (least number of bound tables) to most dependent
@@ -106,7 +109,8 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
             logger.debug("Created table: {} ", tables[tableCount].getName());
          }
       }
-     logger.info("Creating DDL COMPLETED");
+     logger.info("****Creating DDL COMPLETED****");
+     logger.debug("createDDL()\n\n" + sb);
    }
 
    protected int convertStrBooleanToInt(String input) { //MySQL uses '1' and '0' for boolean types
@@ -116,36 +120,11 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
          return 0;
       }
    }
-   
-   public String generateDatabaseName() { //prompts user for database name
 
-      logger.info("Promping database name");
-     
-      String dbNameDefault = "MySQLDB";
-      //String databaseName = "";
+  public void setDatabaseName(String name) {
 
-      do {
-         databaseName = (String)JOptionPane.showInputDialog(
-                       null,
-                       "Enter the database name:",
-                       "Database Name",
-                       JOptionPane.PLAIN_MESSAGE,
-                       null,
-                       null,
-                       dbNameDefault);
-         if (databaseName == null) {
-            EdgeConvertGUI.setReadSuccess(false);
-            return "";
-         }
-         if (databaseName.equals("")) {
-            JOptionPane.showMessageDialog(null, "You must select a name for your database.");
-         }
-      } while (databaseName.equals(""));
-     
-      logger.info("Database name is set to: {}", databaseName);
-     
-      return databaseName;
-   }
+    this.databaseName = name;
+  }
    
    public String getDatabaseName() {
       return databaseName;
