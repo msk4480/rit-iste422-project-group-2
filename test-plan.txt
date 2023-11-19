@@ -1,0 +1,24 @@
+I S T E - 4 2 2  P R O J E C T  P L A N  G R O U P  2
+-----------------------------------------------------
+
+CreateDDLMySQLTest:
+
+  ** CONSTRUCTOR RELATED **
+
+  - GIVEN no test object, WHEN constructor is called with no params, THEN database name should be null and product name should be "MySQL"
+
+  *** EdgeTable = "1|Table1" and EdgeField = "1|Field1" ***
+
+  - GIVEN table and field arrays each with one record, WHEN constructor is called with table and field both added and makeArrays() called, THEN getSQLString() should return "CREATE DATABASE MySQLDB;\r\nUSE MySQLDB;\r\nCREATE TABLE Table1 (\r\n\tField1 VARCHAR(1),\r\n);\r\n\r\n"
+
+  - GIVEN empty table array and field array with one record, WHEN constructor is called with table and field both added and makeArrays() called, THEN getSQLString() should return "CREATE DATABASE MySQLDB;\r\nUSE MySQLDB;\r\n"
+
+  - GIVEN table and field arrays each with one record, WHEN constructor is called with tableID and fieldID both added no makeArrays() called, THEN createDDL() should throw a NullPointerException
+
+  ** GETTER TESTS **
+
+  - GIVEN no object, WHEN object is created with no params, THEN getProductName() should return "MySQL"
+
+  - GIVEN no object, WHEN object is created with no params and setDatabaseName() is called with "MySQLDB", THEN getDatabaseName() should equal "MySQLDB"
+
+  - GIVEN no object, WHEN object is created with no params, getDatabaseName() should equal null which is invalid against ""
