@@ -13,12 +13,32 @@ public class EdgeField {
       StringTokenizer st = new StringTokenizer(inputString, EdgeConvertFileParser.DELIM);
       numFigure = Integer.parseInt(st.nextToken());
       name = st.nextToken();
-      tableID = 0;
-      tableBound = 0;
+      if (st.hasMoreTokens()){
+         tableID = Integer.parseInt(st.nextToken());
+      }else{
+         tableID = 0;
+      }
+      if (st.hasMoreTokens()){
+         tableBound = Integer.parseInt(st.nextToken());
+      }else{
+         tableBound = 0;
+      }
       fieldBound = 0;
-      disallowNull = false;
-      isPrimaryKey = false;
-      defaultValue = "";
+      if (st.hasMoreTokens()){
+         disallowNull = Boolean.parseBoolean(st.nextToken());
+      }else{
+         disallowNull = false;
+      }
+      if (st.hasMoreTokens()){
+         isPrimaryKey = Boolean.parseBoolean(st.nextToken());
+      }else{
+         isPrimaryKey = false;
+      }
+      if (st.hasMoreTokens()){
+         defaultValue = st.nextToken();
+      }else{
+         defaultValue = "Default";
+      }
       varcharValue = VARCHAR_DEFAULT_LENGTH;
       dataType = 0;
 

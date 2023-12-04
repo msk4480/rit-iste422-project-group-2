@@ -85,15 +85,15 @@ public class EdgeFieldTest {
 				EdgeField edgeField = new EdgeField("1|FieldName|0|0|false|true|Default");
 
 				// Test setting default value for different data types
-				edgeField.setDataType(EdgeField.DATA_TYPE_BOOLEAN);
+				edgeField.setDataType(1);
 				edgeField.setDefaultValue("true");
 				assertEquals("true", edgeField.getDefaultValue());
 
-				edgeField.setDataType(EdgeField.DATA_TYPE_INTEGER);
+				edgeField.setDataType(2);
 				edgeField.setDefaultValue("42");
 				assertEquals("42", edgeField.getDefaultValue());
 
-				edgeField.setDataType(EdgeField.DATA_TYPE_DOUBLE);
+				edgeField.setDataType(3);
 				edgeField.setDefaultValue("3.14");
 				assertEquals("3.14", edgeField.getDefaultValue());
 		}

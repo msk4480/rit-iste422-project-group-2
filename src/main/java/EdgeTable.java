@@ -42,6 +42,9 @@ public class EdgeTable {
    }
    
    public void setRelatedField(int index, int relatedValue) {
+      if ((index < 0) || (index >= relatedFields.length)) {
+         return;
+      }
       relatedFields[index] = relatedValue;
       logger.info("Related field " + index + " set to " + relatedValue);
    }
@@ -69,7 +72,7 @@ public class EdgeTable {
    }
    
    public void moveFieldDown(int index) { //move the field closer to the end of the list
-      if (index == (nativeFields.length - 1)) {
+      if (index >= (nativeFields.length - 1)) {
          return;
       }
       int tempNative = nativeFields[index + 1]; //save element at destination index

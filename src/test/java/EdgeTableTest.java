@@ -113,7 +113,6 @@ public class EdgeTableTest {
         edgeTable.addRelatedTable(Integer.MIN_VALUE);
         edgeTable.addNativeField(Integer.MAX_VALUE);
         edgeTable.makeArrays();
-        //setRelatedFields does not check if index is valid
         edgeTable.setRelatedField(5, Integer.MAX_VALUE);
     }
 
@@ -136,7 +135,6 @@ public class EdgeTableTest {
         edgeTable.addRelatedTable(Integer.MIN_VALUE);
         edgeTable.addNativeField(Integer.MAX_VALUE);
         edgeTable.makeArrays();
-        //program checks for edge moves but not out-of-bounds
         edgeTable.moveFieldDown(edgeTable.getNativeFieldsArray().length);
     }
 
