@@ -17,7 +17,7 @@ public abstract class EdgeConvertCreateDDL {
   protected int[] numBoundTables;
   protected int maxBound;
   protected StringBuffer sb;
-  protected int selected;
+  // protected int selected;
 
   public EdgeConvertCreateDDL(EdgeTable[] tables, EdgeField[] fields) {
 
@@ -25,7 +25,25 @@ public abstract class EdgeConvertCreateDDL {
     
     this.tables = tables;
     this.fields = fields;
-    initialize();
+
+    this.numBoundTables = new int[this.tables.length];
+    this.maxBound = 0;
+
+    for(int i = 0; i < this.tables.length; i++) {
+
+      int numBound = 0;
+      int[] relatedFields = this.tables[i].getRelatedFieldsArray();
+
+      for(int field : relatedFields) {
+
+        if(field != 0) numBound++;
+      }
+
+      numBoundTables[i] = numBound;
+      
+      if(numBound > maxBound) maxBound = numBound;
+    }
+    
   } // EdgeConvertCreateDDL(EdgeTable[], EdgeField[])
 
   public EdgeConvertCreateDDL() { // default constructor with empty arg list for to allow output dir to be set
@@ -33,29 +51,6 @@ public abstract class EdgeConvertCreateDDL {
     logger.info("EdgeCongertCreateDDL constructor called w/ 0 args");
 
   } // EdgeConvertCreateDDL()
-
-  public void initialize() {
-    
-    numBoundTables = new int[tables.length];
-    maxBound = 0;
-    sb = new StringBuffer();
-
-    for (int i = 0; i < tables.length; i++) { // step through list of tables
-      int numBound = 0; // initialize counter for number of bound tables
-      int[] relatedFields = tables[i].getRelatedFieldsArray();
-      for (int j = 0; j < relatedFields.length; j++) { // step through related fields list
-        if (relatedFields[j] != 0) {
-          numBound++; // count the number of non-zero related fields
-        }
-      }
-      numBoundTables[i] = numBound;
-      if (numBound > maxBound) {
-        maxBound = numBound;
-      }
-    }
-
-    logger.info("EdgeConvertCreateDDL Initialized");
-  }
 
   protected EdgeTable getTable(int numFigure) {
     for (int tIndex = 0; tIndex < tables.length; tIndex++) {
@@ -81,8 +76,10 @@ public abstract class EdgeConvertCreateDDL {
 
   public abstract String getProductName();
 
-  public abstract String getSQLString();
+  // public abstract String getSQLString();
+  public abstract String getDatabaseString();
 
-  public abstract void createDDL();
+  // public abstract void createDDL();
+  public abstract void generateDDL();
 
 }// EdgeConvertCreateDDL

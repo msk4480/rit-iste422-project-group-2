@@ -1096,7 +1096,7 @@ public class EdgeConvertGUI {
       try {
          Class selectedSubclass = objSubclasses[selected].getClass();
         
-         Method getSQLString = selectedSubclass.getMethod("getSQLString", (Class)null);
+         Method getDatabaseString = selectedSubclass.getMethod("getDatabaseString", (Class)null);
          Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", (Class)null);
          Method setDatabaseName = selectedSubclass.getMethod("setDatabaseName", String.class);
         
@@ -1141,11 +1141,11 @@ public class EdgeConvertGUI {
         return ""; //breaks early due to canceled request
       }
 
-      if(databaseName.equals("")) {
+      if(databaseName.equals("") || !"^[^\\/?%*:|\"<>.]{1,64}$".matches(databaseName)) {
         
         JOptionPane.showMessageDialog(
           null,
-          "You must select a name for your database."
+          "You must select a valid name for your database."
         ); 
       }
       
