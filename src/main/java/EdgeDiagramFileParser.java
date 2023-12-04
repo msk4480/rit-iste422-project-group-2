@@ -11,7 +11,7 @@ class EdgeDiagramFileParser extends EdgeConvertFileParser {
 		private String tableName;
 		private String fieldName;
 		
-		private boolean isEntity, isAttribute, isUnderlined;
+		private boolean isEntity, isAttribute, isUnderlined=false;
 
 		public EdgeDiagramFileParser(File constructorFile) {
 				super(constructorFile);
