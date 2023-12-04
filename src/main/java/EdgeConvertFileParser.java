@@ -10,7 +10,7 @@ public abstract class EdgeConvertFileParser {
 		protected static final Logger consoleLogger = LogManager.getLogger(EdgeConvertFileParser.class);
 
 		protected File parseFile;
-		private FileReader fr;
+		private boolean isEntity, isAttribute, isUnderlined = false;
 		protected BufferedReader br;
 		protected String currentLine;
 		protected ArrayList alTables;
@@ -20,23 +20,17 @@ public abstract class EdgeConvertFileParser {
 		protected EdgeField[] fields;
 		protected EdgeField tempField;
 		protected EdgeConnector[] connectors;
-		private String style;
-		private String text;
-		private String tableName;
-		private String fieldName;
-		private boolean isEntity, isAttribute, isUnderlined = false;
 		protected int numFigure;
 		protected int numConnector;
 		protected int numFields;
 		protected int numTables;
-		private int numNativeRelatedFields;
 		protected int endPoint1;
 		protected int endPoint2;
-		private int numLine;
+		protected int numLine;
 		public static final String EDGE_ID = "EDGE Diagram File"; // first line of .edg files should be this
 		public static final String SAVE_ID = "EdgeConvert Save File"; // first line of save files should be this
 		public static final String DELIM = "|";
-		public EdgeConvertFileParser(File constructorFile) {
+	    protected EdgeConvertFileParser(File constructorFile) {
 				numFigure = 0;
 				numConnector = 0;
 				alTables = new ArrayList<>();
@@ -82,6 +76,7 @@ public abstract class EdgeConvertFileParser {
 		}
 
 		public void openFile(File inputFile) {
+    			FileReader fr;
 				try {
 						fr = new FileReader(inputFile);
 						br = new BufferedReader(fr);
