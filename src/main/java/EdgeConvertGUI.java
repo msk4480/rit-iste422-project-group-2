@@ -1102,7 +1102,7 @@ public class EdgeConvertGUI {
         
          setDatabaseName.invoke(objSubclasses[selected], databaseNameDialog()); //added to separate GUI code
          databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], (Object)null);
-         strSQLString = (String)getSQLString.invoke(objSubclasses[selected], (Object)null);
+         strSQLString = (String)getDatabaseString.invoke(objSubclasses[selected], (Object)null);
       
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();

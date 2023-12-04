@@ -188,14 +188,10 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    public String getProductName() {
       return "MySQL";
    }
-
-   public String getSQLString() {
-      createDDL();
-      return sb.toString();
-   }
-
+  
   public String getDatabaseString() {
-    
+    generateDDL();
+    return sb.toString();
   }
    
 }//EdgeConvertCreateDDL
