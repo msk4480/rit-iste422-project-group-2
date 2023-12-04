@@ -29,7 +29,7 @@ public class EdgeTable {
    }
    
    public void addRelatedTable(int relatedTable) {
-      alRelatedTables.add(new Integer(relatedTable));
+      alRelatedTables.add(relatedTable);
       logger.info("Added related table " + relatedTable);
    }
    
@@ -51,7 +51,7 @@ public class EdgeTable {
    }
 
    public void addNativeField(int value) {
-      alNativeFields.add(new Integer(value));
+      alNativeFields.add(value);
       logger.info("Added native field " + value);
    }
 
