@@ -80,6 +80,6 @@ public abstract class EdgeConvertCreateDDL {
   public abstract String getDatabaseString();
 
   // public abstract void createDDL();
-  public abstract void generateDDL();
+  public abstract void createDDL();
 
 }// EdgeConvertCreateDDL

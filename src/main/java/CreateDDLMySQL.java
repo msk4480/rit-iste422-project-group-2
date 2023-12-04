@@ -31,7 +31,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
       logger.info("CreateDDLMySQL constructor called w/ 0 args");
    }
    
-   public void generateDDL() {
+   public void createDDL() {
      
       logger.info("Creating DDL...");
      
@@ -190,7 +190,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
    }
   
   public String getDatabaseString() {
-    generateDDL();
+    createDDL();
     return sb.toString();
   }
    
