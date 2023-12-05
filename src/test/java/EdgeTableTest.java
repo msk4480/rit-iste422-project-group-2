@@ -70,15 +70,23 @@ public class EdgeTableTest {
         edgeTable.addRelatedTable(3);
         edgeTable.addNativeField(4);
         edgeTable.makeArrays();
-        String expected = """
-                Table: 1\r
-                {\r
-                TableName: StringTest\r
-                NativeFields: 2|4\r
-                RelatedTables: 1|3\r
-                RelatedFields: 0|0\r
-                }\r
-                """;
+        String expected = "Table: 1\r" +
+          "{\r" +
+          "TableName: StringTest\r" +
+          "NativeFields: 2|4\r" +
+          "RelatedTables: 1|3\r" +
+          "RelatedFields: 0|0\r" +
+          "}\r";
+        // below was giving compile errors
+        // String expected = """
+        //         Table: 1\r
+        //         {\r
+        //         TableName: StringTest\r
+        //         NativeFields: 2|4\r
+        //         RelatedTables: 1|3\r
+        //         RelatedFields: 0|0\r
+        //         }\r
+        //         """;
         assertEquals(expected, edgeTable.toString());
     }
 

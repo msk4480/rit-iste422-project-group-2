@@ -53,8 +53,8 @@ public class CreateDDLMySQLTest {
     CreateDDLMySQL testObj = new CreateDDLMySQL(tables, fields);
 
     assertEquals(
-      testObj.getSQLString(),
-      "CREATE DATABASE MySQLDB;\r\nUSE MySQLDB;\r\nCREATE TABLE Table1 (\r\n\tField1 VARCHAR(1),\r\n);\r\n\r\n"
+      testObj.getDatabaseString(),
+      "CREATE DATABASE MySQLDB;\r\nUSE MySQLDB;\r\nCREATE TABLE Table1 (\r\n\tField1 VARCHAR(1)\r\n);\r\n\r\n"
     );
   }
 
@@ -75,7 +75,7 @@ public class CreateDDLMySQLTest {
     CreateDDLMySQL testObj = new CreateDDLMySQL(tables, fields);
 
     assertEquals(
-      testObj.getSQLString(),
+      testObj.getDatabaseString(),
       "CREATE DATABASE MySQLDB;\r\nUSE MySQLDB;\r\n"
     );
     
