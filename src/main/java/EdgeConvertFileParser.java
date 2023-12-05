@@ -87,6 +87,7 @@ public abstract class EdgeConvertFileParser {
 								this.parseFile();
 								br.close();
 								this.makeArrays();
+                this.resolveConnectors();
 						} else {
 								if (currentLine.startsWith(SAVE_ID)) {
 										this.parseFile();
@@ -116,12 +117,15 @@ public abstract class EdgeConvertFileParser {
 		private void resolveConnectors() { // Identify nature of Connector endpoints
 			int endPoint1, endPoint2;
 			int fieldIndex = 0, table1Index = 0, table2Index = 0;
+      System.out.println("Fields DEBUG: " + Arrays.toString(fields));
 			for (int cIndex = 0; cIndex < connectors.length; cIndex++) {
 				endPoint1 = connectors[cIndex].getEndPoint1();
 				endPoint2 = connectors[cIndex].getEndPoint2();
 				fieldIndex = -1;
 				for (int fIndex = 0; fIndex < fields.length; fIndex++) { // search fields array for endpoints
+          // if(true) throw new RuntimeException("line 124");
 					if (endPoint1 == fields[fIndex].getNumFigure()) { // found endPoint1 in fields array
+            // if(true) throw new RuntimeException("line 126");
 						connectors[cIndex].setIsEP1Field(true); // set appropriate flag
 						fieldIndex = fIndex; // identify which element of the fields array that endPoint1 was found in
 					}

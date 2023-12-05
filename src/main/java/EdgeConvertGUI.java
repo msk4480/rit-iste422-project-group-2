@@ -1049,8 +1049,9 @@ public class EdgeConvertGUI {
                   objOutput = conResultClass.newInstance(args);
                }
                alSubclasses.add(objOutput);
-               Method getProductName = resultClass.getMethod("getProductName", (Class)null);
-               String productName = (String)getProductName.invoke(objOutput, (Object)null);
+               Method getProductName = resultClass.getMethod("getProductName", (Class[]) null);
+               String productName = (String) getProductName.invoke(objOutput, (Object[]) null);
+                System.out.println("************ HERE ******************");
                alProductNames.add(productName);
             }
          }
@@ -1096,13 +1097,13 @@ public class EdgeConvertGUI {
       try {
          Class selectedSubclass = objSubclasses[selected].getClass();
         
-         Method getDatabaseString = selectedSubclass.getMethod("getDatabaseString", (Class)null);
-         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", (Class)null);
+         Method getDatabaseString = selectedSubclass.getMethod("getDatabaseString", (Class[]) null);
+         Method getDatabaseName = selectedSubclass.getMethod("getDatabaseName", (Class[]) null);
          Method setDatabaseName = selectedSubclass.getMethod("setDatabaseName", String.class);
         
          setDatabaseName.invoke(objSubclasses[selected], databaseNameDialog()); //added to separate GUI code
-         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], (Object)null);
-         strSQLString = (String)getDatabaseString.invoke(objSubclasses[selected], (Object)null);
+         databaseName = (String)getDatabaseName.invoke(objSubclasses[selected], (Object[]) null);
+         strSQLString = (String)getDatabaseString.invoke(objSubclasses[selected], (Object[]) null);
       
       } catch (IllegalAccessException iae) {
          iae.printStackTrace();
@@ -1141,7 +1142,7 @@ public class EdgeConvertGUI {
         return ""; //breaks early due to canceled request
       }
 
-      if(databaseName.equals("") || !"^[^\\/?%*:|\"<>.]{1,64}$".matches(databaseName)) {
+      if(databaseName.equals("")) {
         
         JOptionPane.showMessageDialog(
           null,
@@ -1195,6 +1196,7 @@ public class EdgeConvertGUI {
       public void actionPerformed(ActionEvent ae) {
          for (int i = 0; i < jrbDataType.length; i++) {
             if (jrbDataType[i].isSelected()) {
+               logger.debug("Field Datatype Updated to: " + i);
                currentDTField.setDataType(i);
                break;
             }

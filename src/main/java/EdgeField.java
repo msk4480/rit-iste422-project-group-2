@@ -37,7 +37,7 @@ public class EdgeField {
       if (st.hasMoreTokens()){
          defaultValue = st.nextToken();
       }else{
-         defaultValue = "Default";
+         defaultValue = "";
       }
       varcharValue = VARCHAR_DEFAULT_LENGTH;
       dataType = 0;

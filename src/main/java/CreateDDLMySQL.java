@@ -75,13 +75,14 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                   }
                  
                   if (!currentField.getDefaultValue().equals("")) {
-                    
-                     if (currentField.getDataType() == 1) { //boolean data type
-                       
-                        sb.append(" DEFAULT " + convertStrBooleanToInt(currentField.getDefaultValue()));
-                     } else { //any other data type
-                       
-                        sb.append(" DEFAULT " + currentField.getDefaultValue());
+
+                    sb.append(" DEFAULT ");
+
+                     switch(currentField.getDataType()) {
+                       case 0: sb.append("'" + currentField.getDefaultValue() + "'"); break;
+                       case 1: sb.append(convertStrBooleanToInt(currentField.getDefaultValue())); break;
+                       case 2:
+                       case 3: sb.append(currentField.getDefaultValue());
                      }
                   }
                  
@@ -100,7 +101,7 @@ public class CreateDDLMySQL extends EdgeConvertCreateDDL {
                   }
 
                   // only add if not the last field in the table
-                  if(nativeFieldCount < nativeFields.length) {
+                  if(nativeFieldCount < nativeFields.length - 1 || numPrimaryKey > 0 || numForeignKey > 0) {
                     sb.append(",");
                   }
                  
